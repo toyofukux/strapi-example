@@ -10,7 +10,7 @@ export default {
       // 'he',
       // 'id',
       // 'it',
-      // 'ja',
+      'ja',
       // 'ko',
       // 'ms',
       // 'nl',
@@ -28,6 +28,11 @@ export default {
       // 'zh-Hans',
       // 'zh',
     ],
+    translations: {
+      ja: {
+        "content-manager.HeaderLayout.button.label-add-entry": "エントリを追加",
+      }
+    }
   },
   bootstrap(app) {
     console.log(app);
