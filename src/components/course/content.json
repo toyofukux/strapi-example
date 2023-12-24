@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_course_contents",
+  "info": {
+    "displayName": "Content",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.spec"
+    }
+  }
+}

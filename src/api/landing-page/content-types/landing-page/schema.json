@@ -18,8 +18,9 @@
     "blocks": {
       "type": "dynamiczone",
       "components": [
-        "shared.spec",
-        "shared.gallery"
+        "course.content",
+        "course.curriculum",
+        "course.points"
       ]
     }
   }

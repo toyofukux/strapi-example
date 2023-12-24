@@ -819,6 +819,15 @@ export interface ApiCourseCourse extends Schema.CollectionType {
     description: Attribute.Text;
     thumbnail: Attribute.Media;
     tags: Attribute.Relation<'api::course.course', 'oneToMany', 'api::tag.tag'>;
+    creators: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::creator.creator'
+    >;
+    expireType: Attribute.Enumeration<
+      ['unlimitd', 'limitedTime', 'fixedDuration']
+    >;
+    expireValue: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -830,6 +839,43 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCreatorCreator extends Schema.CollectionType {
+  collectionName: 'creators';
+  info: {
+    singularName: 'creator';
+    pluralName: 'creators';
+    displayName: 'Creator';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    title: Attribute.String;
+    description: Attribute.Blocks;
+    website: Attribute.String;
+    twitter: Attribute.String;
+    instagram: Attribute.String;
+    pixiv: Attribute.String;
+    image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::creator.creator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::creator.creator',
       'oneToOne',
       'admin::user'
     > &
@@ -850,7 +896,9 @@ export interface ApiLandingPageLandingPage extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    blocks: Attribute.DynamicZone<['shared.spec', 'shared.gallery']>;
+    blocks: Attribute.DynamicZone<
+      ['course.content', 'course.curriculum', 'course.points']
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -943,6 +991,7 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::content-block.content-block': ApiContentBlockContentBlock;
       'api::course.course': ApiCourseCourse;
+      'api::creator.creator': ApiCreatorCreator;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::product.product': ApiProductProduct;
       'api::tag.tag': ApiTagTag;

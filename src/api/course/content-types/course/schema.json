@@ -43,6 +43,22 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::tag.tag"
+    },
+    "creators": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::creator.creator"
+    },
+    "expireType": {
+      "type": "enumeration",
+      "enum": [
+        "unlimitd",
+        "limitedTime",
+        "fixedDuration"
+      ]
+    },
+    "expireValue": {
+      "type": "string"
     }
   }
 }

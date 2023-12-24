@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_course_points",
+  "info": {
+    "displayName": "Points",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.spec"
+    }
+  }
+}

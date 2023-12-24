@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_course_curricula",
+  "info": {
+    "displayName": "Curriculum",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.spec"
+    }
+  }
+}

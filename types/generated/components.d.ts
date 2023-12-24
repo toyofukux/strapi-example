@@ -1,5 +1,38 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface CourseContent extends Schema.Component {
+  collectionName: 'components_course_contents';
+  info: {
+    displayName: 'Content';
+    icon: 'bulletList';
+  };
+  attributes: {
+    list: Attribute.Component<'shared.spec', true>;
+  };
+}
+
+export interface CourseCurriculum extends Schema.Component {
+  collectionName: 'components_course_curricula';
+  info: {
+    displayName: 'Curriculum';
+    icon: 'bulletList';
+  };
+  attributes: {
+    sections: Attribute.Component<'shared.spec', true>;
+  };
+}
+
+export interface CoursePoints extends Schema.Component {
+  collectionName: 'components_course_points';
+  info: {
+    displayName: 'Points';
+    icon: 'bulletList';
+  };
+  attributes: {
+    list: Attribute.Component<'shared.spec', true>;
+  };
+}
+
 export interface SharedGallery extends Schema.Component {
   collectionName: 'components_course_galleries';
   info: {
@@ -8,7 +41,19 @@ export interface SharedGallery extends Schema.Component {
     description: '';
   };
   attributes: {
-    images: Attribute.Media;
+    images: Attribute.Media & Attribute.Required;
+  };
+}
+
+export interface SharedImage extends Schema.Component {
+  collectionName: 'components_shared_images';
+  info: {
+    displayName: 'Image';
+    icon: 'picture';
+  };
+  attributes: {
+    source: Attribute.Media & Attribute.Required;
+    caption: Attribute.Blocks;
   };
 }
 
@@ -43,16 +88,20 @@ export interface SharedSpec extends Schema.Component {
     description: '';
   };
   attributes: {
-    heading: Attribute.String;
-    image: Attribute.Media;
-    description: Attribute.Text;
+    heading: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    description: Attribute.Blocks;
   };
 }
 
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'course.content': CourseContent;
+      'course.curriculum': CourseCurriculum;
+      'course.points': CoursePoints;
       'shared.gallery': SharedGallery;
+      'shared.image': SharedImage;
       'shared.paragraph': SharedParagraph;
       'shared.pv': SharedPv;
       'shared.spec': SharedSpec;
