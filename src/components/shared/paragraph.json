@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_course_paragraphs",
+  "info": {
+    "displayName": "Paragraph",
+    "icon": "bold",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "body": {
+      "type": "blocks"
+    }
+  }
+}

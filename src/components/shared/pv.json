@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_course_pvs",
+  "info": {
+    "displayName": "Video",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "URL": {
+      "type": "string"
+    }
+  }
+}

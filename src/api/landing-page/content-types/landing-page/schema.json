@@ -18,8 +18,8 @@
     "blocks": {
       "type": "dynamiczone",
       "components": [
-        "course.spec",
-        "course.gallery"
+        "shared.spec",
+        "shared.gallery"
       ]
     }
   }
