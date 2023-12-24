@@ -768,38 +768,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiContentBlockContentBlock extends Schema.CollectionType {
-  collectionName: 'content_blocks';
-  info: {
-    singularName: 'content-block';
-    pluralName: 'content-blocks';
-    displayName: 'ContentBlock';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    type: Attribute.Enumeration<
-      ['heading', 'gallery', 'video', 'imageCaption']
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::content-block.content-block',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::content-block.content-block',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCourseCourse extends Schema.CollectionType {
   collectionName: 'courses';
   info: {
@@ -811,13 +779,49 @@ export interface ApiCourseCourse extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
-    releasedAt: Attribute.DateTime & Attribute.Required;
-    reservationStartedAt: Attribute.DateTime;
-    salesEndedAt: Attribute.DateTime;
-    description: Attribute.Text;
-    thumbnail: Attribute.Media;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    releasedAt: Attribute.DateTime &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    reservationStartedAt: Attribute.DateTime &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    salesEndedAt: Attribute.DateTime &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    thumbnail: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     tags: Attribute.Relation<'api::course.course', 'oneToMany', 'api::tag.tag'>;
     creators: Attribute.Relation<
       'api::course.course',
@@ -826,8 +830,23 @@ export interface ApiCourseCourse extends Schema.CollectionType {
     >;
     expireType: Attribute.Enumeration<
       ['unlimitd', 'limitedTime', 'fixedDuration']
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    expireValue: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    landing_pages: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::landing-page.landing-page'
     >;
-    expireValue: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -843,6 +862,12 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::course.course'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -852,19 +877,66 @@ export interface ApiCreatorCreator extends Schema.CollectionType {
     singularName: 'creator';
     pluralName: 'creators';
     displayName: 'Creator';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    name: Attribute.String & Attribute.Required;
-    title: Attribute.String;
-    description: Attribute.Blocks;
-    website: Attribute.String;
-    twitter: Attribute.String;
-    instagram: Attribute.String;
-    pixiv: Attribute.String;
-    image: Attribute.Media;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    website: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    twitter: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    instagram: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    pixiv: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -880,6 +952,12 @@ export interface ApiCreatorCreator extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::creator.creator',
+      'oneToMany',
+      'api::creator.creator'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -894,10 +972,41 @@ export interface ApiLandingPageLandingPage extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     blocks: Attribute.DynamicZone<
-      ['course.content', 'course.curriculum', 'course.points']
+      [
+        'course.content',
+        'course.curriculum',
+        'course.points',
+        'shared.gallery',
+        'shared.image',
+        'shared.paragraph',
+        'shared.pv',
+        'shared.spec',
+        'shared.heading',
+        'course.abstract'
+      ]
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    course: Attribute.Relation<
+      'api::landing-page.landing-page',
+      'manyToOne',
+      'api::course.course'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -914,6 +1023,12 @@ export interface ApiLandingPageLandingPage extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::landing-page.landing-page',
+      'oneToMany',
+      'api::landing-page.landing-page'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -953,14 +1068,29 @@ export interface ApiTagTag extends Schema.CollectionType {
     singularName: 'tag';
     pluralName: 'tags';
     displayName: 'Tag';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    code: Attribute.String;
-    en: Attribute.String;
-    ja: Attribute.String;
+    code: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    name: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -968,6 +1098,12 @@ export interface ApiTagTag extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::tag.tag',
+      'oneToMany',
+      'api::tag.tag'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -989,7 +1125,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::content-block.content-block': ApiContentBlockContentBlock;
       'api::course.course': ApiCourseCourse;
       'api::creator.creator': ApiCreatorCreator;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;

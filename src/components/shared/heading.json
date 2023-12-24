@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_headings",
+  "info": {
+    "displayName": "Heading",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "string"
+    },
+    "level": {
+      "type": "integer",
+      "required": true,
+      "max": 3,
+      "min": 1
+    }
+  }
+}

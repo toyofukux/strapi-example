@@ -10,18 +10,45 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "blocks": {
       "type": "dynamiczone",
       "components": [
         "course.content",
         "course.curriculum",
-        "course.points"
-      ]
+        "course.points",
+        "shared.gallery",
+        "shared.image",
+        "shared.paragraph",
+        "shared.pv",
+        "shared.spec",
+        "shared.heading",
+        "course.abstract"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "landing_pages"
     }
   }
 }

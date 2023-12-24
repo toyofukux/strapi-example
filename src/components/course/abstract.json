@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_course_abstracts",
+  "info": {
+    "displayName": "Abstract",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.spec"
+    }
+  }
+}

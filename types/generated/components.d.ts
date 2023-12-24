@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface CourseAbstract extends Schema.Component {
+  collectionName: 'components_course_abstracts';
+  info: {
+    displayName: 'Abstract';
+    icon: 'bulletList';
+  };
+  attributes: {
+    list: Attribute.Component<'shared.spec', true>;
+  };
+}
+
 export interface CourseContent extends Schema.Component {
   collectionName: 'components_course_contents';
   info: {
@@ -42,6 +53,23 @@ export interface SharedGallery extends Schema.Component {
   };
   attributes: {
     images: Attribute.Media & Attribute.Required;
+  };
+}
+
+export interface SharedHeading extends Schema.Component {
+  collectionName: 'components_shared_headings';
+  info: {
+    displayName: 'Heading';
+    icon: 'bulletList';
+  };
+  attributes: {
+    content: Attribute.String;
+    level: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 3;
+      }>;
   };
 }
 
@@ -97,10 +125,12 @@ export interface SharedSpec extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'course.abstract': CourseAbstract;
       'course.content': CourseContent;
       'course.curriculum': CourseCurriculum;
       'course.points': CoursePoints;
       'shared.gallery': SharedGallery;
+      'shared.heading': SharedHeading;
       'shared.image': SharedImage;
       'shared.paragraph': SharedParagraph;
       'shared.pv': SharedPv;
