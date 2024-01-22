@@ -44,11 +44,14 @@
         }
       }
     },
-    "course": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course.course",
-      "inversedBy": "landing_pages"
+    "landingPageId": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "customField": "plugin::field-uuid.uuid"
     }
   }
 }
